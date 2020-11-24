@@ -10,8 +10,8 @@ const MovieList = ({ movies }) => {
     <div className="MovieList">
       <Grid container direction="row" justify="center">
         {!isEmpty(movies) &&
-          movies.map((m) => {
-            return <MovieListItem key={m.imdbID} title={m.Title} posterURL={m.Poster} />;
+          movies.map((movie) => {
+            return <MovieListItem key={movie.id} movie={movie} />;
           })}
       </Grid>
     </div>

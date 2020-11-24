@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = ({ onSubmit }) => {
   // const [buttonDisabled, setButtonDisabled] = useState(true);
   const classes = useStyles();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [query, setQuery] = useState('');
 
-  const onSearchValueChange = (term) => debounce(setSearchTerm(term), 500);
+  const onSearchValueChange = (term) => debounce(setQuery(term), 500);
 
   const onSearchSubmit = (event) => {
     event.preventDefault();
 
-    onSubmit(searchTerm);
+    onSubmit(query);
   };
 
   return (
