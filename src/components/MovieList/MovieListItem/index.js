@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { GlobalContext } from '../../../context/GlobalState';
-import { Card, CardActions, CardMedia, makeStyles, Grid, IconButton } from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, makeStyles, Grid, IconButton, Typography } from '@material-ui/core';
 import { Bookmarks, Favorite, Info } from '@material-ui/icons';
 // import { red, blue } from '@material-ui/core/colors';
 
@@ -23,15 +23,26 @@ const useStyles = makeStyles({
 const MovieListItem = ({ movie }) => {
   const classes = useStyles();
   const { addMovieToWatchList } = useContext(GlobalContext);
-  // const movieTitle = !movie.title ? movie.name || movie.original_title : movie.title;
   const imageUrl = `https://image.tmdb.org/t/p/w200${movie.poster_path}`;
 
+  const formatTitle = (movie) => {
+    const { name, title, original_title, release_date } = movie;
+
+    // !movie.title ? movie.name || movie.original_title : movie.title;
+    if (title && release_date) {
+      return `${title} (${release_date.substring(0, 4)})`;
+    } else if (!title || !release_date) {
+      return `${movie.name || movie.original_title}`;
+    } else {
+      return 'Untitled';
+    }
+  };
+
   return (
-    <Grid item component={Card} xs={12} md={4} lg={2} className={classes.card}>
+    <Grid item component={Card} xs={8} md={4} lg={2} className={classes.card}>
       <CardMedia
         component="img"
         alt={`${movie.title} Poster`}
-        height={300}
         image={imageUrl}
         title={movie.title}
         onError={(e) => {
@@ -39,17 +50,20 @@ const MovieListItem = ({ movie }) => {
           e.target.src = defaultMovie;
         }}
       />
-      <CardActions className={classes.actions}>
-        <IconButton aria-label="Add movie to watchlist" onClick={() => addMovieToWatchList(movie)}>
-          <Favorite />
-        </IconButton>
-        <IconButton aria-label="Mark movie watched">
-          <Bookmarks />
-        </IconButton>
-        <IconButton aria-label="See movie info">
-          <Info />
-        </IconButton>
-      </CardActions>
+      <CardContent>
+        <Typography variant="body1" component="h3">{formatTitle(movie)}</Typography>
+        <CardActions className={classes.actions}>
+          <IconButton aria-label="Add movie to watchlist" onClick={() => addMovieToWatchList(movie)}>
+            <Favorite />
+          </IconButton>
+          <IconButton aria-label="Mark movie watched">
+            <Bookmarks />
+          </IconButton>
+          <IconButton aria-label="See movie info">
+            <Info />
+          </IconButton>
+        </CardActions>
+      </CardContent>
     </Grid>
   );
 };
