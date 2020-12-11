@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container } from './styles';
-import logo from 'assets/img/logo.png';
+import logo from '../../assets/img/logo.png';
+import LogoContainer from './styles';
 
 const Logo = () => {
   return (
-    <Container>
+    <LogoContainer>
       <img src={logo} alt="TV Finder" />
-    </Container>
+    </LogoContainer>
   );
 };
 

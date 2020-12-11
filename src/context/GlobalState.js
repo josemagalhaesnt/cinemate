@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
 const initialState = {
@@ -10,7 +10,8 @@ const initialState = {
 export const GlobalContext = createContext(initialState);
 
 // Provider components
-export const GlobalProvider = (props) => {
+// eslint-disable-next-line react/prop-types
+export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
@@ -19,8 +20,10 @@ export const GlobalProvider = (props) => {
   };
 
   return (
-    <GlobalContext.Provider value={{ watchlist: state.watchlist, watched: state.watched, addMovieToWatchList }}>
-      {props.children}
+    <GlobalContext.Provider
+      value={{ watchlist: state.watchlist, watched: state.watched, addMovieToWatchList }}
+    >
+      {children}
     </GlobalContext.Provider>
   );
 };

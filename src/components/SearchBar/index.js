@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import debounce from 'lodash';
@@ -40,7 +41,12 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <div className="SearchBar">
-      <Paper component="form" className={classes.root} theme="dark" onSubmit={(e) => onSearchSubmit(e)}>
+      <Paper
+        component="form"
+        className={classes.root}
+        theme="dark"
+        onSubmit={(e) => onSearchSubmit(e)}
+      >
         <InputBase
           className={classes.input}
           placeholder="Search Movies and Series"
@@ -53,6 +59,10 @@ const SearchBar = ({ onSubmit }) => {
       </Paper>
     </div>
   );
+};
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

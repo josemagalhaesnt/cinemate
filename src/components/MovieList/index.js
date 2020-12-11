@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.scss';
-import MovieListItem from './MovieListItem';
 import { isEmpty } from 'lodash';
 import { Grid } from '@material-ui/core';
+import MovieListItem from './MovieListItem';
 
 const MovieList = ({ movies }) => {
   return (
